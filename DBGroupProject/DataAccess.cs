@@ -1,5 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
+using Oracle.DataAccess.Types;
+
 
 namespace DBGroupProject
 {
@@ -13,10 +15,19 @@ namespace DBGroupProject
 
         public static void Connect()
         {
-            con = new OracleConnection();
-            con.ConnectionString = "Data Source=XE;User Id=system;Password=admin;";
-            con.Open();
-            Console.WriteLine("Connected to Oracle" + con.ServerVersion);
+            try
+            {
+                string oradb = "Data Source=//localhost:1521/xe;User Id=system;Password=admin;";
+
+                con = new OracleConnection(oradb);  // C#
+
+                con.Open();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }        
         }
 
         public static void Close()
